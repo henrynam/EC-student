@@ -128,7 +128,15 @@ void GPIO_pupdr(GPIO_TypeDef *Port, int pin, int pupd);
 
 * **Port** : Port Number, GPIOA~GPIOH
 * **Pin** : Pin number (int) 0~15
-* **pupd** : No PullupPulldown
+* **pupd** : No PullupPulldown (0), Pull-Up(1), Pull-Down(2), ...
+
+
+
+**Example code**
+
+```
+GPIO_pupdr(GPIOA, 5, 0); // 0: NO PUPD
+```
 
 ------
 
