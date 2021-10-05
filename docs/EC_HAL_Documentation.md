@@ -4,7 +4,7 @@ description: EC_HAL API
 
 # Embedded Controller HAL
 
-Written by:  Your Name
+Written by:  Eun-Taek Nam
 
 
 
@@ -82,7 +82,7 @@ void GPIO_init(GPIO_TypeDef *Port, int pin, int mode);
 **Example code**
 
 ```c++
-GPIO_init(GPIOA, 5, OUTPUT);
+GPIO_init(GPIOA, 5, OUTPUT); // calls RCC_GPIOA_enable()
 GPIO_init(GPIOC, 13, INPUT); //GPIO_init(GPIOC, 13, 0);
 ```
 
@@ -114,9 +114,51 @@ GPIO_mode(GPIOA, 5, OUTPUT);
 
 
 
+## GPIO_read()
+
+It contains the input value of the corresponding I/O port.
+
+```
+int GPIO_ospeed(GPIO_TypeDef *Port, int pin);
+```
+
+**Parameters**
+
+* **Port** : Port Number, GPIOA~GPIOH
+* **Pin** : Pin number (int) 0~15
+* **speed** : Low speed (0), Medium speed (1), Fast speed (2), High speed (3)
+
+**Example code**
+
+```
+int state = GPIO_read(GPIOC, 13); // button pressed : 0, button released : 1
+```
+
+
+
+## GPIO_write()
+
+It functions as Output data register. Bits can be individually set and reset by writing to the GPIOX register.
+
+```
+void GPIO_write(GPIO_TypeDef *Port, int pin, int Output);
+```
+
+**Parameters**
+
+* **Port** : Port Number, GPIOA~GPIOH
+* **Pin** : Pin number (int) 0~15
+* **Output** : LOW (0), HIGH (1)
+
+**Example code**
+
+```
+GPIO_write(GPIOC, 13, 1); // 1: HIGH
+```
+
+
+
 ## GPIO_pupdr()
-
-
 
 Configures GPIO pin modes : In/Out/AF/Analog
 
@@ -138,25 +180,56 @@ void GPIO_pupdr(GPIO_TypeDef *Port, int pin, int pupd);
 GPIO_pupdr(GPIOA, 5, 0); // 0: NO PUPD
 ```
 
-------
 
 
+## GPIO_otype()
 
-## Class or Header name
+Configures GPIO pin modes : In/Out/AF/Analog
 
-### Function Name
-
-```text
-
+```
+void GPIO_otype(GPIO_TypeDef *Port, int pin, int type);
 ```
 
 **Parameters**
 
-* p1
-* p2
+* **Port** : Port Number, GPIOA~GPIOH
+* **Pin** : Pin number (int) 0~15
+* **type** : Output push-pull (0), Output open-drain (1)
+
+
 
 **Example code**
 
-```text
+```
+GPIO_type(GPIOA, 5, 0); // 0: Output push-pull (RESET)
+```
+
+
+
+## GPIO_ospeed()
+
+Configures GPIO pin modes : In/Out/AF/Analog
 
 ```
+void GPIO_ospeed(GPIO_TypeDef *Port, int pin, int speed);
+```
+
+**Parameters**
+
+* **Port** : Port Number, GPIOA~GPIOH
+* **Pin** : Pin number (int) 0~15
+* **speed** : Low speed (0), Medium speed (1), Fast speed (2), High speed (3)
+
+**Example code**
+
+```
+GPIO_ospeed(GPIOA, 5, 1); // 1: Medium speed
+```
+
+
+
+`header.h`
+
+
+
+The header file is `ecGPIO.h`
