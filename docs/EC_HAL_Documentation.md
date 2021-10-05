@@ -114,6 +114,22 @@ GPIO_mode(GPIOA, 5, OUTPUT);
 
 
 
+## GPIO_pupdr()
+
+
+
+Configures GPIO pin modes : In/Out/AF/Analog
+
+```
+void GPIO_pupdr(GPIO_TypeDef *Port, int pin, int pupd);
+```
+
+**Parameters**
+
+* **Port** : Port Number, GPIOA~GPIOH
+* **Pin** : Pin number (int) 0~15
+* **pupd** : No PullupPulldown
+
 ------
 
 
